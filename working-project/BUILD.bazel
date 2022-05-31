@@ -1,0 +1,23 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_library")
+
+java_library(
+    name = "library",
+    srcs = [
+        "src/main/java/com/example/myproject/Bar.java",
+        "src/main/java/com/example/myproject/Foo.java",
+    ],
+    plugins = [
+        "//:immutables_processor",
+    ],
+    deps = [
+        "@maven//:org_immutables_value_annotations",
+    ],
+)
+
+java_binary(
+    name = "binary",
+    srcs = ["src/main/java/com/example/myapp/App.java"],
+    main_class = "com.example.myapp.App",
+    deps = [":library"],
+)
+
